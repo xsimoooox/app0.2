@@ -1,0 +1,353 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Base keyframes for page transition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes pulse-corners {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes fadeInWord {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes authCheckPop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.word-fade-in {
+  display: inline;
+  animation: fadeInWord 150ms ease forwards;
+}
+
+.rencontre-corner-tl { animation: pulse-corners 2s infinite; }
+.rencontre-corner-tr { animation: pulse-corners 2s infinite 0.5s; }
+.rencontre-corner-bl { animation: pulse-corners 2s infinite 1s; }
+.rencontre-corner-br { animation: pulse-corners 2s infinite 1.5s; }
+
+/* Keyframes for blinking elements */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s infinite ease-in-out;
+}
+
+.animate-blink-1 {
+  animation: blink 1s infinite ease-in-out;
+  animation-delay: 0s;
+}
+
+.animate-blink-2 {
+  animation: blink 1s infinite ease-in-out;
+  animation-delay: 200ms;
+}
+
+.animate-blink-3 {
+  animation: blink 1s infinite ease-in-out;
+  animation-delay: 400ms;
+}
+
+/* Cadre extérieur avatar — coins arrondis 24px (forme par mode) */
+.avatar-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  flex: 0 1 auto;
+  background-color: #c8c6e8;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.28),
+    0 12px 40px rgba(79, 70, 229, 0.14);
+}
+
+/* Frizitta : cadre serré sur l’avatar (425×576), pas toute la largeur écran */
+.avatar-container--frizitta {
+  width: auto;
+  max-width: min(425px, 92vw);
+  height: min(
+    576px,
+    calc(100vh - 52px - 140px - 56px - 120px)
+  );
+  aspect-ratio: 425 / 576;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.avatar-container--frizitta .avatar-stage-frizitta img {
+  object-fit: cover !important;
+  object-position: center 8% !important;
+}
+
+.avatar-container--alex {
+  aspect-ratio: 3 / 4;
+  max-width: min(640px, 100%);
+  max-height: min(
+    calc(100vh - 52px - 140px - 56px - 120px),
+    calc((100vw - 24px) * 4 / 3)
+  );
+  background-color: #ffffff;
+}
+
+.avatar-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Boutons circulaires sous le cadre avatar */
+.avatar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  padding-bottom: 0.25rem;
+}
+
+.avatar-action-btn {
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 9999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.avatar-action-btn:active {
+  transform: scale(0.94);
+}
+
+.avatar-action-btn--avatar {
+  color: #4f46e5;
+  background: linear-gradient(165deg, #ffffff 0%, #eef2ff 100%);
+  border-color: rgba(79, 70, 229, 0.22);
+  box-shadow:
+    0 6px 20px rgba(79, 70, 229, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.avatar-action-btn--avatar:hover {
+  box-shadow:
+    0 8px 24px rgba(79, 70, 229, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.avatar-action-btn--end {
+  color: #dc2626;
+  background: linear-gradient(165deg, #ffffff 0%, #fef2f2 100%);
+  border-color: rgba(239, 68, 68, 0.28);
+  box-shadow:
+    0 6px 20px rgba(239, 68, 68, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.avatar-action-btn--end:hover {
+  box-shadow:
+    0 8px 24px rgba(239, 68, 68, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+video, img {
+  object-fit: contain !important;
+}
+
+/* Uniformisation Frizitta — remplit le cadre 3:4 parent, fond réf. #C8C6E8 */
+.avatar-container .avatar-stage-frizitta,
+.avatar-container .avatar-stage-alex {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  aspect-ratio: unset !important;
+}
+
+.avatar-stage-frizitta {
+  background-color: transparent !important;
+  overflow: hidden !important;
+}
+
+.avatar-stage-frizitta img {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Uniformisation Alex — vidéo 16:9 en cover, cadrage haut du personnage */
+.avatar-stage-alex {
+  background-color: #ffffff !important;
+  overflow: hidden !important;
+}
+
+.avatar-stage-alex video {
+  object-fit: cover !important;
+  object-position: center 8% !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  background-color: transparent !important;
+}
+
+/* Contacts light theme */
+.contacts-light {
+  background: #F0F2F5 !important;
+  color: #1F2937 !important;
+}
+
+.contacts-light [class*="bg-[#f5f5f5]"],
+.contacts-light [class*="bg-[#fafafa]"],
+.contacts-light [class*="bg-[#ffffff]"],
+.contacts-light [class*="bg-[#eeeeee]"],
+.contacts-light [class*="bg-[#e5e5e5]"],
+.contacts-light [class*="bg-[#fff1f1]"] {
+  background-color: #FFFFFF !important;
+}
+
+.contacts-light [class*="bg-[#e8f5e9]"] {
+  background-color: #F0FDF4 !important;
+}
+
+.contacts-light [class*="bg-[#eff6ff]"] {
+  background-color: #EFF6FF !important;
+}
+
+.contacts-light [class*="bg-[#fffbeb]"] {
+  background-color: #FFFBEB !important;
+}
+
+.contacts-light [class*="bg-[#ede7f6]"],
+.contacts-light [class*="bg-[#fee2e2]"] {
+  background-color: #EEF2FF !important;
+}
+
+.contacts-light [class*="border-[#e0e0e0]"],
+.contacts-light [class*="border-[#e5e5e5]"],
+.contacts-light [class*="border-[#e0e0e0]"],
+.contacts-light [class*="border-[#e0e0e0]"],
+.contacts-light [class*="border-[#d1d5db]"],
+.contacts-light [class*="border-[#fee2e2]"],
+.contacts-light [class*="border-red-950"],
+.contacts-light [class*="border-white/5"] {
+  border-color: #E5E7EB !important;
+}
+
+.contacts-light [class*="text-[#111111]"],
+.contacts-light [class*="text-[#333333]"],
+.contacts-light [class*="text-slate-100"],
+.contacts-light [class*="text-slate-200"],
+.contacts-light [class*="text-slate-300"],
+.contacts-light [class*="text-slate-350"] {
+  color: #1F2937 !important;
+}
+
+.contacts-light [class*="text-[#888888]"],
+.contacts-light [class*="text-[#666]"],
+.contacts-light [class*="text-slate-400"],
+.contacts-light [class*="text-slate-500"],
+.contacts-light [class*="text-slate-600"],
+.contacts-light [class*="placeholder-slate-500"],
+.contacts-light [class*="placeholder-slate-600"]::placeholder {
+  color: #6B7280 !important;
+}
+
+.contacts-light input,
+.contacts-light textarea {
+  background-color: #FFFFFF !important;
+  color: #1F2937 !important;
+  border-color: #E5E7EB !important;
+}
+
+.contacts-light input::placeholder,
+.contacts-light textarea::placeholder {
+  color: #9CA3AF !important;
+}
+
+.contacts-light [class*="shadow-inner"] {
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04) !important;
+}
+
+.contacts-light [class*="hover:bg-[#eeeeee]"]:hover,
+.contacts-light [class*="hover:bg-[#eeeeee]"]:hover,
+.contacts-light [class*="hover:bg-[#eeeeee]"]:hover,
+.contacts-light [class*="active:bg-[#eeeeee]"]:active,
+.contacts-light [class*="active:bg-[#fee2e2]"]:active {
+  background-color: #F9FAFB !important;
+}
+
+.contacts-light [class*="bg-red-950"] {
+  background-color: #FEE2E2 !important;
+  color: #DC2626 !important;
+}
+
+.contacts-light [class*="bg-amber-950"] {
+  background-color: #FEF3C7 !important;
+}
+
+.contacts-light .ti-arrow-left,
+.contacts-light .ti-search,
+.contacts-light .ti-history,
+.contacts-light .ti-share,
+.contacts-light .ti-star,
+.contacts-light .ti-alert-triangle,
+.contacts-light .ti-ban,
+.contacts-light .ti-trash {
+  color: #6B7280;
+}
